@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->text('color');
+            $table->text('icon');
             $table->foreignId('created_by')->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
