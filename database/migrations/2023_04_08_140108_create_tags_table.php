@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('color');
-            $table->string('icon');
 
             $table->foreignId('created_by')->constrained('users')
                 ->onUpdate('cascade')

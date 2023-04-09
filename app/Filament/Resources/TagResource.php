@@ -6,11 +6,13 @@ use App\Filament\Resources\TagResource\Pages;
 use App\Filament\Resources\TagResource\RelationManagers;
 use App\Models\Tag;
 use Filament\Forms;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ColorColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -27,12 +29,9 @@ class TagResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('color')
+                ColorPicker::make('color')
+                    ->rgb()
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('icon')
-                    ->required()
-                    ->maxLength(255),
             ]);
     }
 
@@ -42,8 +41,10 @@ class TagResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('created_by'),
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('color'),
-                Tables\Columns\TextColumn::make('icon'),
+                ColorColumn::make('color')
+                    ->copyable()
+                    ->copyMessage('Color code copied')
+                    ->copyMessageDuration(1500),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
