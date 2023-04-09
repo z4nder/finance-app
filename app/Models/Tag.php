@@ -18,4 +18,9 @@ class Tag extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function spends(): BelongsToMany
+    {
+        return $this->belongsToMany(Spend::class);
+    }
 }
