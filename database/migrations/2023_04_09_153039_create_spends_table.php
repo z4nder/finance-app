@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('spends', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->decimal('value',20,2);
+            $table->decimal('value', 20, 2);
             $table->date('date');
             $table->foreignId('created_by')->constrained('users')
                 ->onUpdate('cascade')

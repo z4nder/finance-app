@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\SpendResource\Pages;
 
 use App\Filament\Resources\SpendResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateSpend extends CreateRecord

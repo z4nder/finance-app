@@ -14,7 +14,7 @@ class Spend extends Model
         'title',
         'date',
         'value',
-        'created_by'
+        'created_by',
     ];
 
     public function user(): BelongsTo

@@ -3,18 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TagResource\Pages;
-use App\Filament\Resources\TagResource\RelationManagers;
 use App\Models\Tag;
 use Filament\Forms;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Hidden;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\ColorColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TagResource extends Resource
 {
@@ -31,7 +27,7 @@ class TagResource extends Resource
                     ->maxLength(255),
                 ColorPicker::make('color')
                     ->rgb()
-                    ->required()
+                    ->required(),
             ]);
     }
 

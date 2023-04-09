@@ -12,8 +12,9 @@ class Tag extends Model
     protected $fillable = [
         'name',
         'color',
-        'created_by'
+        'created_by',
     ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
