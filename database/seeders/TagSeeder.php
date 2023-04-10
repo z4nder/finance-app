@@ -12,7 +12,7 @@ class TagSeeder extends Seeder
     public function run(): void
     {
         User::all()->each(function(User $user) {
-            Tag::factory(5)->create([
+            Tag::factory(8)->create([
                 'created_by' => $user->id
             ]);
         });

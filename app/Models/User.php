@@ -47,4 +47,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tag::class, 'created_by', 'id');
     }
+    public function spends(): HasMany
+    {
+        return $this->hasMany(Spend::class, 'created_by', 'id');
+    }
 }

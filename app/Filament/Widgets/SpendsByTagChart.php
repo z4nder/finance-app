@@ -27,8 +27,8 @@ class SpendsByTagChart extends PieChartWidget
 
     protected function getData(): array
     {
-        $data = Tag::
-            withSum('spends', 'value')
+        $data = auth()->user()->tags()
+            ->withSum('spends', 'value')
             ->whereHas('spends', function (Builder $query) {
                 //$query->where
             })

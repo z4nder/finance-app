@@ -10,8 +10,7 @@ class SpendStats extends BaseWidget
 {
     protected function getCards(): array
     {
-        $totalSpend =  Spend::sum('value');
-        $totalSpend =  Spend::sum('value');
+        $totalSpend =  auth()->user()->spends()->sum('value');
 
         return [
             Card::make('Total spend', "R$ ".$totalSpend),

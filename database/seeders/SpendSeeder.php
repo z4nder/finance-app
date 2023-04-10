@@ -15,7 +15,7 @@ class SpendSeeder extends Seeder
     public function run(): void
     {
         User::all()->each(function(User $user) {
-            Spend::factory(10)
+            Spend::factory(5)
                 ->state(new Sequence(
                     fn (Sequence $sequence) =>
                     ['date' => $this->getMonthRandomDay(Carbon::now()->subMonths(2))],
@@ -24,7 +24,7 @@ class SpendSeeder extends Seeder
                     'created_by' => $user->id
                 ]);
 
-            Spend::factory(10)
+            Spend::factory(5)
                 ->state(new Sequence(
                     fn (Sequence $sequence) =>
                     ['date' => $this->getMonthRandomDay(Carbon::now()->subMonth())],
@@ -33,7 +33,7 @@ class SpendSeeder extends Seeder
                     'created_by' => $user->id
                 ]);
 
-            Spend::factory(10)
+            Spend::factory(5)
                 ->state(new Sequence(
                     fn (Sequence $sequence) =>
                     ['date' => $this->getMonthRandomDay(Carbon::now())],
@@ -42,7 +42,7 @@ class SpendSeeder extends Seeder
                     'created_by' => $user->id
                 ]);
 
-            Spend::factory(10)
+            Spend::factory(5)
                 ->state(new Sequence(
                     fn (Sequence $sequence) =>
                     ['date' => $this->getMonthRandomDay(Carbon::now()->addMonth())],
@@ -56,7 +56,7 @@ class SpendSeeder extends Seeder
             $spend->tags()->sync(
                 Tag::where('created_by', $spend->created_by)
                     ->inRandomOrder()
-                    ->limit(5)
+                    ->limit(rand(1, 5))
                     ->pluck('id')
             );
         });
