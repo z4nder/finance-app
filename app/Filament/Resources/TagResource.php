@@ -35,16 +35,11 @@ class TagResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('created_by'),
                 Tables\Columns\TextColumn::make('name'),
                 ColorColumn::make('color')
                     ->copyable()
                     ->copyMessage('Color code copied')
-                    ->copyMessageDuration(1500),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->copyMessageDuration(1500)
             ])
             ->filters([
                 //

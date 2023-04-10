@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class SpendsByTagChart extends PieChartWidget
 {
-    protected static ?string $heading = 'Chart';
+    protected static ?string $heading = 'Spend by tag';
     public ?string $filter = 'today';
     protected static ?string $maxHeight = '300px';
 
