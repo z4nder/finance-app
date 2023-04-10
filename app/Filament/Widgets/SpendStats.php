@@ -8,6 +8,8 @@ use Filament\Widgets\StatsOverviewWidget\Card;
 
 class SpendStats extends BaseWidget
 {
+    protected static ?int $sort = 1;
+
     protected function getCards(): array
     {
         $totalSpend =  auth()->user()->spends()->sum('value');
