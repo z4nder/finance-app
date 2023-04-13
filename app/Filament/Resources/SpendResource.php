@@ -12,6 +12,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
 
 class SpendResource extends Resource
 {
@@ -35,7 +36,11 @@ class SpendResource extends Resource
                     ->required(),
                 Select::make('tags')
                     ->multiple()
-                    ->relationship('tags', 'name'),
+                    ->relationship(
+                        'tags',
+                        'name',
+                        fn (Builder $query) => $query->where('tags.created_by', auth()->user()->id)
+                    )
             ]);
     }
 
