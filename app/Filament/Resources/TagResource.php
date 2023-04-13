@@ -39,7 +39,7 @@ class TagResource extends Resource
                 ColorColumn::make('color')
                     ->copyable()
                     ->copyMessage('Color code copied')
-                    ->copyMessageDuration(1500)
+                    ->copyMessageDuration(1500),
             ])
             ->filters([
                 //

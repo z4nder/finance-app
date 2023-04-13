@@ -2,14 +2,14 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Spend;
 use Filament\Widgets\LineChartWidget;
-use Flowframe\Trend\Trend;
 
 class SpendProgressionByMonth extends LineChartWidget
 {
     protected static ?string $heading = 'Chart';
+
     protected static ?int $sort = 2;
+
     protected static ?string $maxHeight = '300px';
 //    protected static ?array $options = [
 //        'scales' => [
@@ -38,7 +38,7 @@ class SpendProgressionByMonth extends LineChartWidget
             return [
                 'labels' => $date->shortMonthName,
                 'values' => (int) $total,
-                'year' => $date->format('d-m-Y')
+                'year' => $date->format('d-m-Y'),
             ];
         });
 

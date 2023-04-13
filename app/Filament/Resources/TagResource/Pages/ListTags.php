@@ -15,6 +15,7 @@ class ListTags extends ListRecords
     {
         return parent::getTableQuery()->whereCreatedBy(auth()->user()->id);
     }
+
     protected function getActions(): array
     {
         return [
