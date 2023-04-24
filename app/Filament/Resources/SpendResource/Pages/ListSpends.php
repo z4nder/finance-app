@@ -13,7 +13,9 @@ class ListSpends extends ListRecords
 
     protected function getTableQuery(): Builder
     {
-        return parent::getTableQuery()->whereCreatedBy(auth()->user()->id);
+        return parent::getTableQuery()
+        ->whereCreatedBy(auth()->user()->id)
+        ->orderBy('created_at', 'desc');
     }
 
     protected function getActions(): array
