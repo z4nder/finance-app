@@ -23,8 +23,8 @@ class SpendStats extends BaseWidget
             ->first();
 
         return [
-            Card::make('Total spend', 'R$ '.$totalSpend),
-            Card::make('Most spend category', $mostSpendTag->name),
+            Card::make('Total spend current month', 'R$ '.$totalSpend),
+            Card::make('Most spend category current month', $mostSpendTag->name),
         ];
     }
 }
