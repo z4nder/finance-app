@@ -15,7 +15,7 @@ class ListSpends extends ListRecords
     {
         return parent::getTableQuery()
         ->whereCreatedBy(auth()->user()->id)
-        ->orderBy('created_at', 'desc');
+        ->orderBy('date', 'desc');
     }
 
     protected function getActions(): array
