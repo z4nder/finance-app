@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use Filament\Widgets\PieChartWidget;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 
 class SpendsByTagChart extends PieChartWidget
 {
@@ -11,29 +12,34 @@ class SpendsByTagChart extends PieChartWidget
 
     protected static ?string $heading = 'Spend by tag';
 
-    public ?string $filter = 'today';
+    public ?string $filter = 'monthFilter';
 
     protected static ?string $maxHeight = '300px';
 
+    public array $months = [];
+
+    public function boot()
+    {
+        $this->months = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
+
+        $this->filter = array_search(now()->format('F'), $this->months);
+    }
+
     protected function getFilters(): ?array
     {
-        return [
-            'today' => 'Today',
-            'week' => 'Current Week',
-            'month' => 'Current Month',
-            'year' => 'Current Year',
-        ];
+        return $this->months;
     }
 
     protected function getData(): array
     {
+        $filterMonthNumber = Carbon::parse($this->months[$this->filter]);
+
         $data = auth()->user()->tags()
             ->withSum('spends', 'value')
-            ->whereHas('spends', function (Builder $query) {
-                //$query->where
+            ->whereHas('spends', function (Builder $query) use($filterMonthNumber){
+                $query->whereMonth('spends.date', $filterMonthNumber);
             })
             ->has('spends')
-            //->whereMonth('spends.created_at', '04')
             ->get();
 
          return [
