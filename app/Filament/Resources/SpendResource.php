@@ -14,6 +14,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 
 class SpendResource extends Resource
 {
@@ -56,6 +57,13 @@ class SpendResource extends Resource
                     ->date('d/m/Y'),
             ])
             ->filters([
+                SelectFilter::make('tags')
+                ->multiple()
+                ->relationship(
+                    'tags',
+                    'name',
+                    fn (Builder $query) => $query->where('tags.created_by', auth()->user()->id)
+                ),
                 Filter::make('date')
                 ->form([
                     DatePicker::make('created_from')->label('Início'),
