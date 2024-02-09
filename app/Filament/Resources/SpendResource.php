@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\Filter;
 
 class SpendResource extends Resource
 {
@@ -55,7 +56,22 @@ class SpendResource extends Resource
                     ->date('d/m/Y'),
             ])
             ->filters([
-                //
+                Filter::make('date')
+                ->form([
+                    DatePicker::make('created_from')->label('Início'),
+                    DatePicker::make('created_until')->label('Fim'),
+                ])
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['created_from'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                        );
+                })
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
