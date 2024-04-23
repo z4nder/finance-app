@@ -35,23 +35,24 @@ class SpendsByTagChart extends PieChartWidget
         $filterMonthNumber = Carbon::parse($this->months[$this->filter]);
 
         $data = auth()->user()->tags()
-            ->withSum('spends', 'value')
-            ->whereHas('spends', function (Builder $query) use($filterMonthNumber){
-                $query->whereMonth('spends.date', $filterMonthNumber);
-            })
-            ->has('spends')
+            ->withSum([
+                'spends' => function ($query) use ($filterMonthNumber) {
+                    $query->whereMonth('date', $filterMonthNumber);
+                }
+            ], 'value')
             ->get();
 
-         return [
-             'datasets' => [
-                 [
-                     'backgroundColor' => $data->pluck('color'),
-                     'label' => 'Blog posts',
-                     'data' => $data->pluck('spends_sum_value'),
-                 ],
-             ],
 
-             'labels' => $data->pluck('name'),
-         ];
+        return [
+            'datasets' => [
+                [
+                    'backgroundColor' => $data->pluck('color'),
+                    'label' => 'Blog posts',
+                    'data' => $data->pluck('spends_sum_value'),
+                ],
+            ],
+
+            'labels' => $data->pluck('name'),
+        ];
     }
 }
